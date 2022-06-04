@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../button/Button';
 
-const Form = () => (
+const CreateNewBook = () => (
   <section className="form-section">
     <h4>ADD NEW BOOK</h4>
     <form className="book-form">
@@ -27,4 +27,4 @@ const Form = () => (
   </section>
 );
 
-export default Form;
+export default CreateNewBook;
