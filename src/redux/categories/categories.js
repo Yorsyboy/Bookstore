@@ -1,4 +1,4 @@
-const CHECK_STATUS = 'HECK_STATUS';
+const CHECK_STATUS = 'CHECK_STATUS';
 
 export const setCategoryStatus = (status) => ({
   type: CHECK_STATUS,
