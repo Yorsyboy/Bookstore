@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeBook } from '../redux/books/books';
 
 const Books = () => {
-  const booksState = useSelector((state) => state.bookReducer);
+  const booksState = useSelector((state) => state.bookReducer.books);
+  const booksArray = Object.values(booksState);
   const dispatch = useDispatch();
 
   const remove = (id) => {
@@ -11,22 +12,22 @@ const Books = () => {
 
   return (
     <section>
-      {booksState.map((books) => (
-        <div key={`Book ${books.book.id}`} className="book-card">
+      {booksArray.map((books, index) => (
+        <div key={Object.keys(booksState)[index]} className="book-card">
           <div className="book-info">
-            <h3 className="book-category">{books.book.category}</h3>
-            <h2 className="book-title">{books.book.title}</h2>
-            <h4 className="book-author">{books.book.author}</h4>
+            <h3 className="book-category">{books[0].category}</h3>
+            <h2 className="book-title">{books[0].title}</h2>
+            <h4 className="book-author">Toyosi</h4>
             <ul className="book-events">
-              <button type="button">Comments</button>
+              <button type="button" disabled>Comments</button>
               <button
                 type="button"
                 onClick={(e) => remove(e.target.id)}
-                id={books.book.id}
+                id={Object.keys(booksState)[index]}
               >
                 Remove
               </button>
-              <button type="button">Edit</button>
+              <button type="button" disabled>Edit</button>
             </ul>
           </div>
           <div className="book-completion">
@@ -39,7 +40,7 @@ const Books = () => {
           <div className="book-update">
             <h4>CURRENT CHAPTER</h4>
             <p>Chapter 17</p>
-            <button className="btn" type="button">
+            <button className="btn" type="button" disabled>
               UPDATE PROGRESS
             </button>
           </div>

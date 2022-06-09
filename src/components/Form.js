@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../redux/books/books';
-import store from '../redux/configureStore';
+// import { addBook } from '../redux/books/books';
+// import store from '../redux/configureStore';
+import { v4 as uuidv4 } from 'uuid';
+import { postBook } from '../redux/books/books';
 
 const AddNewBook = () => {
   const [form, setForm] = useState({
     inputTitle: '',
-    inputAuthor: '',
     selectedValue: 'none',
     selectedText: '',
   });
@@ -15,13 +16,6 @@ const AddNewBook = () => {
     setForm({
       ...form,
       inputTitle: e.target.value,
-    });
-  };
-
-  const handleAuthorChange = (e) => {
-    setForm({
-      ...form,
-      inputAuthor: e.target.value,
     });
   };
 
@@ -39,19 +33,23 @@ const AddNewBook = () => {
   const submitBookToStore = (e) => {
     e.preventDefault();
     const newBook = {
-      id: store.getState().bookReducer.length,
+      item_id: uuidv4(),
       title: form.inputTitle,
-      author: form.inputAuthor,
+      author: 'Toyosi',
       category: form.selectedText,
     };
 
-    dispatch(addBook(newBook));
+    dispatch(postBook(newBook));
   };
   return (
-    <form onSubmit={(e) => submitBookToStore(e)} className="book-form" required>
-      <label htmlFor="book">
-        ADD NEW BOOK
-        <br />
+    <>
+      <hr />
+      <h1 className="form-title"> ADD NEW BOOK</h1>
+      <form
+        onSubmit={(e) => submitBookToStore(e)}
+        className="book-form"
+        required
+      >
         <input
           type="text"
           id="book"
@@ -60,34 +58,26 @@ const AddNewBook = () => {
           onChange={handleTitleChange}
           required
         />
-      </label>
-      <input
-        type="text"
-        id="author"
-        placeholder="Book author"
-        value={form.inputAuthor}
-        onChange={handleAuthorChange}
-        required
-      />
-      <select
-        value={form.selectedValue}
-        onChange={handleSelectChange}
-        name="categories"
-        id="categories"
-        required
-      >
-        <option value="none" disabled>
-          Category
-        </option>
-        <option value="action">Action</option>
-        <option value="sport">Sport</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="anime">Anime</option>
-      </select>
-      <button className="btn" type="submit">
-        ADD BOOK
-      </button>
-    </form>
+        <select
+          value={form.selectedValue}
+          onChange={handleSelectChange}
+          name="categories"
+          id="categories"
+          required
+        >
+          <option value="none" disabled>
+            Category
+          </option>
+          <option value="action">Action</option>
+          <option value="sport">Sport</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="anime">Anime</option>
+        </select>
+        <button className="btn" type="submit">
+          ADD BOOK
+        </button>
+      </form>
+    </>
   );
 };
 export default AddNewBook;
