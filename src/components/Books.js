@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import { removeBook } from '../redux/books/books';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Books = () => {
   const booksState = useSelector((state) => state.bookReducer.books);
@@ -31,6 +33,7 @@ const Books = () => {
             </ul>
           </div>
           <div className="book-completion">
+            <CircularProgressbar value={66} />
             <h2>
               64%
               <br />
