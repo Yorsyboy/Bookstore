@@ -1,6 +1,7 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Bookstore
+Book-Store is a website you can add and remove books. With "Book-Store" and it's API, the books are stored for everybody and ready for later use
 
 ## Built With
 
